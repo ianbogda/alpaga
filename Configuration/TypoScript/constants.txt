@@ -1,0 +1,124 @@
+// vi: set fenc=utf-8 ts=4 sw=4 et:
+#################
+### Variables ###
+#################
+urlSite = http://prod.cauvaldor.fr
+
+
+
+
+##############
+### CONFIG ###
+##############
+config {
+	compressCss    = 0
+	concatenateCss = 0
+	concatenateJs  = 0
+}
+
+
+############
+### PAGE ###
+############
+page {
+	menu.top    = 540
+	menu.direct = 535
+	footer      = 533
+
+	logo {
+		file = EXT:alpaga/Resources/Public/Images/logo_cauvaldor.jpg
+		height = 100
+	}
+
+	theme {
+		news {
+		    list {
+		        maxWInText = 0
+		    }
+		}
+		copyright {
+		    text = Site officiel de <a href="http://prod.cauvaldor.fr">Ville</a>, fonctionnant avec <a href="http://www.typo3.org">TYPO3</a> et développé par le <a href="http://www.cdg46.fr">CDG46</a>.
+		}
+	}
+
+	fluidtemplate {
+		layoutRootPath   = EXT:alpaga/Resources/Private/Layouts/Page/
+		partialRootPath  = EXT:alpaga/Resources/Private/Partials/Page/
+		templateRootPath = EXT:alpaga/Resources/Private/Templates/Page/
+	}
+}
+
+
+###############
+### PLUGINS ###
+###############
+plugin {
+
+    ###############
+    ### TX_NEWS ###
+    ###############
+    tx_news {
+        view {
+            partialRootPath  = EXT:alpaga/Resources/Private/Partials/News/
+            templateRootPath = EXT:alpaga/Resources/Private/Templates/News/
+        }
+    }
+
+    ##########################
+    ### BOOTSTRAP _PACKAGE ###
+    ##########################
+	bootstrap_package {
+		settings {
+			overrideLessVariables = 0
+		}
+	}
+
+
+    ###########
+    ### CAL ###
+    ###########
+    tx_cal_controller {
+	    pidList = 553
+
+	    view {
+    		dateFormat = %d %b
+    		event {
+    		    eventTemplateFluid = EXT:alpaga/Resources/Private/Templates/Cal/event.html
+    		}
+    		list {
+    		    listTemplateFluid = EXT:alpaga/Resources/Private/Templates/Cal/list.html
+    		}
+    	}
+    	listMaxW = 300
+    	singleMaxW = 300
+    }
+
+
+    #####################
+    ### INDEXEDSEARCH ###
+    #####################
+    tx_indexedsearch {
+	    searchUID = 554
+    	showAdvanced = 1
+    }
+
+
+    ######################
+    ### COOKIECONSENT2 ###
+    ######################
+    tx_cookieconsent2 {
+        settings {
+            link = 262
+        }
+    }
+
+
+    #############################
+    ### TGMSOCIALSHAREPRIVACY ###
+    #############################
+    tx_tgmsocialshareprivacy {
+        persistence {
+            storagePid = 258
+        }
+    }
+}

@@ -1,0 +1,48 @@
+<footer>
+<section class="footer-section">
+	<div class="container-fluid footer_main">
+	    <div class="container">
+			<div class="row">
+				<div class="col-sm-4">
+					<f:cObject typoscriptObjectPath="lib.dynamicContentSlide" data="{pageUid: '{data.uid}', colPos: '10'}"/>
+				</div>
+				<div class="col-sm-4">
+					<f:cObject typoscriptObjectPath="lib.dynamicContentSlide" data="{pageUid: '{data.uid}', colPos: '11'}"/>
+				</div>
+				<div class="col-sm-4">
+					<f:cObject typoscriptObjectPath="lib.dynamicContentSlide" data="{pageUid: '{data.uid}', colPos: '12'}"/>
+				</div>
+			</div>	
+		</div>
+		
+	</div>
+</section>
+<section class="footer-section">
+	<div class="container_fluid footer_menu">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<f:cObject typoscriptObjectPath="lib.footer_menu"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="meta-section">
+    <div class="container">
+		<div class="row">
+				<div class="col-md-12">
+					<f:cObject typoscriptObjectPath="lib.footer"/>
+				</div>
+		</div>
+        <div class="row">
+            <f:if condition="{themeCopyright}">
+                <div class="pull-right copyright" role="contentinfo">
+                    <f:format.html>{themeCopyrightText}</f:format.html>
+                </div>
+            </f:if>
+        </div>
+    </div>
+</section>
+</footer>

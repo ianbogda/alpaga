@@ -1,0 +1,414 @@
+##################
+#### LANGUAGE ####
+##################
+lib.language >
+
+
+################
+#### CONFIG ####
+################
+config {
+    index_enable      = 1
+    index_externals   = 1
+
+    language          = fr
+    locale_all        = fr_FR.UTF-8
+    htmlTag_setParams = lang="fr" dir="ltr" class="no-js"
+    tx_realurl_enable = 1
+    baseURL           = {$urlSite}  //http://prod.cauvaldor.fr
+}
+
+############
+### PAGE ###
+############
+page {
+    config.language = fr
+    includeCSSLibs {
+        googlefont             = https//fonts.googleapis.com/css?family=Open+Sans:300,400,700|Open+Sans+Condensed:300,700
+        googlefont.external    = 1
+        awesomefont            = https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css
+        awesomefont.external   = 1
+        simpleWeather          = https//cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.css
+        simpleWeather.external = 1
+    }
+    includeCSS {
+        bootstrap   = EXT:bootstrap_package/Resources/Public/Less/Bootstrap/bootstrap.less
+        owlcarousel = EXT:z_theme/Resources/Public/Assets/Css/owl.carousel.css
+        graphisme   = EXT:alpaga/Resources/Public/Less/styles.css
+        yamm        = EXT:alpaga/Resources/Public/Less/yamm.less
+        theme >
+    }
+    includeJSFooterlibs {
+        simpleWeather  = EXT:alpaga/Resources/Public/JavaScript/Libs/jquery.simpleWeather.js
+        slick          = https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick.min.js
+        slick.external = 1
+        carousel       = EXT:z_theme/Resources/Public/Assets/JavaScript/owl.carousel.js
+        custom         = EXT:alpaga/Resources/Public/JavaScript/custom.js
+    }
+}
+    
+    
+################
+#### TOPBAR ####
+################
+lib.navigation.top = COA
+lib.navigation.top {
+    wrap = <ul class="nav navbar-nav navbar-right top">|</ul>
+    10 = HMENU
+    10 {
+        special = directory
+        special.value = {$page.menu.top}
+        1 = TMENU
+        1 {
+            NO = 1
+            NO {
+                wrapItemAndSub = <li class="tiret">|</li>
+            }
+        }
+    }
+    20 = TEXT
+    20.value = <li class="tiret"><a href="#" id="weather"></a></li>
+}
+
+###################
+#### SEARCHBOX ####
+###################
+lib.searchbox = TEXT
+lib.searchbox.value (
+    <form class="navbar-form navbar-right" role="search" autocomplete="off" method="post" action="recherche/">
+        <div class="form-group">
+            <input type="text" class="form-control" id="search" placeholder="Rechercher..." name="tx_indexedsearch[sword]" required title="Recherche sur le site">
+        </div>
+        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+    </form>
+)
+
+####################
+#### NAVIGATION ####
+####################
+lib.navigation.main {
+    10 {
+        entryLevel = 0
+        1 {
+            wrap = <ul class="nav nav-pills navbar-main">|</ul>
+            NO {
+                wrapItemAndSub = <li class="yamm-fw">|</li>
+            }
+            IFSUB {
+                wrapItemAndSub = <li class="dropdown yamm-fw">|</li>
+            }
+        }
+        2 < .1
+        2 {
+            wrap = <ul class="dropdown-menu mega-menu">|</ul>
+            NO {
+                wrapItemAndSub = <li class="mega-menu-column">|</li>
+            }
+            IFSUB < .NO
+            CURIFSUB < .NO
+            ACTIFSUB < .NO
+        }
+        3 < .2
+        3 {
+            wrap = <ul>|</ul>
+            NO {
+                wrapItemAndSub = <li class="nav-header">|</li>
+            }
+        }
+    }
+}
+
+
+#######################
+#### LIENS DIRECTS ####
+#######################
+lib.navigation.direct = HMENU
+lib.navigation.direct {
+    special = directory
+    special.value = {$page.menu.direct}
+    1= TMENU
+    1 {
+        wrap = <ul class="nav nav-pills navbar-right direct">|</ul>
+        noBlur=1
+        expAll = 1
+        NO = 1
+        NO {
+            wrapItemAndSub = <li> | </li>
+        }
+        ACT = 1
+        ACT {
+            wrapItemAndSub = <li class="active"> | </li>
+        }
+        CUR < .ACT
+        IFSUB < .NO
+    }
+    2 < .1
+    2 {
+        wrap = <ul class="second absolute">|</ul>
+    }
+}
+
+
+######################
+#### PLAN DU SITE ####
+######################
+lib.footer_menu < plugin.tx_msfootermenu_pi1
+
+
+######################
+#### LIENS FOOTER ####
+######################
+lib.footer = HMENU
+lib.footer {
+    special = directory
+    special.value = {$page.footer}
+    includeNotInMenu = 1
+    1 = TMENU
+    1 {
+        wrap = <ul class="nav navbar-nav navbar-right">|</ul>
+        NO.allWrap = <li class="tiret">|</li>
+    }
+}
+
+
+# ****************
+# CType: menu
+# ****************
+#A
+temp.pageTeasers = CONTENT
+temp.pageTeasers {
+    table = pages
+    pidInList = this
+    orderBy = sorting ASC
+
+    #B
+    renderObj = COA
+    renderObj {
+        10 = COA
+        10 {
+            10 = TEXT
+            10.typolink.parameter.field = uid
+        }
+        10.stdWrap.stripHtml = 1
+        10.stdWrap.outerWrap = <h3>|</h3>
+
+        #E
+        15 = FILES
+        15 {
+            references {
+                table = tt_content
+                fieldName = image
+            }
+            renderObj = IMAGE
+            renderObj {
+                file {
+                    width = 263c
+                    height = 155c
+                    maxW = 263c
+                    maxH = 155c
+                    import.data = file:current:publicUrl
+                }
+
+                altText.field = title
+                imageLinkWrap = 1
+                imageLinkWrap {
+                    enable = 1
+                    typolink.parameter.field = uid
+                }
+            }
+            stdWrap.wrap = <div class="menu10_bild">|</div>
+        }
+
+        #C
+        20 = CONTENT
+        20 {
+            table = tt_content
+            select {
+                pidInList.field = uid
+                andWhere.wrap = bodytext != '' AND deleted != 1 sys_language_uid=|
+                andWhere.data = TSFE:sys_language_uid
+                andWhere.intval = 1
+                orderBy = sorting ASC
+                max = 1
+            }
+        }
+        #D
+        renderObj = COA
+        renderObj {
+            10 = HTML
+            10.value {
+                field = bodytext
+                cropHTML = 150|...
+                parseFunc < lib.parseFunc_RTE
+            }
+        }
+
+        #F
+        30 = TEXT
+        30 {
+            value = Plus d'informations
+            lang {
+                de = Mehr Information
+                fr = Plus d'informations
+                nl = Meer informatie
+                es = Más información
+                it = Maggiori informazioni
+            }
+            typolink {
+                parameter.field = uid
+                additionalParams.dataWrap = &L={TSFE:sys_language_uid}
+            }
+            outerWrap = <span class="more-info">|</span>
+        }
+        wrap = <div class="my-typoscript-page-teasers">|</div>
+    }
+}
+tt_content.menu {
+    20 {
+        # "Menu of subpages to these pages"
+        1 < temp.pageTeasers
+
+    }
+}
+
+
+##################
+#### CALENDAR ####
+##################
+plugin.tx_cal_controller {
+  clear_anyway = 1
+  view {
+    templateRootPaths {
+      0 = {$plugin.tx_sfeventmgt.view.templateRootPath}
+      1 = EXT:alpaga/Resources/Private/Templates/Cal/
+    }
+    partialRootPaths {
+      0 = {$plugin.tx_sfeventmgt.view.partialRootPath}
+      1 = EXT:alpaga/Resources/Private/Partials/Cal/
+    }
+    layoutRootPaths {
+      0 = {$plugin.tx_sfeventmgt.view.layoutRootPath}
+      1 = EXT:alpaga/Resources/Private/Layouts/Cal/
+    }
+  }
+  view {
+    event {
+      isPreview = 1
+    }
+  }
+  activateFluid = 1
+  pidList = 553
+  display {
+    tx_news {
+      # @description  This is the heart of the connection SQL. It will be used in conjunction with
+      #        the view-where (findallWithinWhere, findAll and findWhere) to retrieve the according records.
+      event_select {
+        selectFields = tx_news_domain_model_news.*
+      }
+      
+      # @description  This is the heart of the connection SQL. It will be used in conjunction with
+      #        the view-where (findallWithinWhere, findAll and findWhere) to retrieve the according records plus their categories.
+      event_select_with_cat {
+        selectFields = tx_news_domain_model_news.*,tx_news_cat_mm.uid_foreign
+        leftjoin = tx_news_cat_mm ON (tx_news.uid = tx_news_cat_mm.uid_local) JOIN tx_news_cat ON (tx_news_cat_mm.uid_foreign = tx_news_cat.uid)
+      }
+      
+      # @description  Configure the table the records come from.
+      pidTable = tx_news_domain_model_news
+      
+      # @description  Define the where clause for the views: day, week, month, year, list, rss
+      #        Use ###START### and ###END### as marker to be replaced during runtime with the timeframe
+      findAllWithinWhere = ((tx_news.datetime >=###START### AND tx_news.datetime+3600<=###END###) OR (tx_news.datetime+3600<=###END### AND tx_news.datetime+3600>=###START###) OR (tx_news.datetime+3600>=###END### AND tx_news.datetime<=###START###))
+      
+      # @description  Define the where clause for the ? view.
+      #        Use ###START### and ###END### as marker to be replaced during runtime with the timeframe
+      findAll =
+      
+      # @description  Define the where clause for the single event views: event, ics
+      #        Use ###START### and ###END### as marker to be replaced during runtime with the timeframe
+      findWhere = tx_news_domain_model_news.uid = ###UID###
+      
+      # @description  Enable this to create a link to another page containing the single view of the external plugin.
+      #        Use ###DB_FIELD### to retrieve record related informations from the database (DB_FIELD is a placeholder)
+      externalPlugin = {$plugin.tx_cal_controller.display.tx_news.externalPlugin}
+      
+      externalPlugin {
+        
+        # @description  Define the pid for the external plugin single view
+        singleViewPid = {$plugin.tx_cal_controller.display.tx_news.externalPlugin.singleViewPid}
+        
+        # @description  Array containing the url paramter to be added to the url
+        additionalParams = {$plugin.tx_cal_controller.display.tx_news.externalPlugin.additionalParams}
+      }
+      
+      # @description  Enables the localization and/or versioning of the result record
+      enableLocalizationAndVersioning = 0
+      
+      # @description  Enables the localization and/or versioning of the category result record
+      enableLocalizationAndVersioningCat = 0
+
+      # @description  Define the field containing the timestamp for the start time
+      startTimeField = datetime
+      
+      # @description  Define the field containing the timestamp for the end time
+      endTimeField =
+
+            # @description  If there is no end time, you can define a default length (in minutes)
+            defaultLength = 180
+
+            # @description  For a quick and easy integration, map your record fields to the standard event fields
+            #        You can always use ###DB_FIELD### (where DB_FIELD is a placeholder for a database row entry) to insert database values  
+            fieldMapping {
+                title = title
+                description = bodytext
+                location =
+                organizer =
+                image = image
+            }
+
+            # @description  The template to be used with these records
+            template = EXT:cal_ts_service/Resources/Private/Templates/ts.tmpl
+
+            # @description  The header style class to be used
+            headerStyle = red_catheader
+
+            # @description  The body style class to be used
+            bodyStyle = red_catbody
+
+            # @description  The title in the legend description for these records
+            legendDescription = News
+
+            search {
+                # @description  The fields, which are allowed to be searched through
+                searchEventFieldList =  tx_news_domain_model_news.title, tx_news_domain_model_news.bodytext
+            }
+
+            # @description  Define the SQL to retrieve the categories
+            cat_select {
+                selectFields = sys_category.*,sys_category_record_mm.uid_local
+                leftjoin = sys_category_record_mm ON (sys_category_record_mm.uid_foreign = tx_news_domain_model_news.categories)
+                andWhere =
+            }
+
+            # @description  The table containing the category records
+            catTable = sys_category
+      
+            # @description  Retrieving and adopting the event configuration for the event view.
+            event {
+                event < plugin.tx_cal_controller.view.event.event
+                event {
+                    # @description  The default image path is related to the tx_cal_{object type}. Therefore the path has to be overwritten
+                    image >
+                    image = IMAGE
+                    image {
+                        file.import.field = image
+                        file.import.stdWrap.wrap = uploads/pics/|
+                    }
+                }
+            }
+        }
+    }
+}
+
+#calRSS.10.display < plugin.tx_cal_controller.display
+

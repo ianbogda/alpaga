@@ -1,0 +1,24 @@
+<div class="item">
+    <f:for each="{event.images}" as="image" iteration="itemIteration">
+        <f:if condition="{itemIteration.isFirst}">
+            <f:image src="{image.uid}" alt="{image.originalResource.title}" class="img-responsive" treatIdAsReference="1" />
+        </f:if>
+    </f:for>
+    <p class="title">
+        <f:link.page
+            additionalParams="{tx_cal_controller: '{view: \'event\',type: event.type, uid: event.uid, year: event.start.year, month: event.start.month, day: event.start.day  }'}">{event.title}</f:link.page>
+    </p>
+    <p class="date">
+        <span class="day"><f:format.date format='d'>@{event.start.time}</f:format.date></span>
+        <span class="month"><f:format.date format='M'>@{event.start.time}</f:format.date></span>
+    </p>
+    <f:for each="{event.categories}" as="category" iteration="itemIteration">
+        <f:if condition="{itemIteration.isFirst}">
+            <span class="category">
+        </f:if>
+        {category.title}
+        <f:if condition="{itemIteration.isLast}">
+            </span>
+        </f:if>
+    </f:for>
+</div>
