@@ -2,7 +2,7 @@
 #################
 ### Variables ###
 #################
-# cat=plugin.th_alpaga:basic, type=string; label=URL du site
+# cat=theme aplpaga:basic, type=string; label=URL du site
 urlSite =
 
 
@@ -21,16 +21,16 @@ config {
 ############
 page {
 	menu {
-        # cat=plugin.th_alpaga:basic, type=string; label=Répertoire Menu top
+        # cat=theme aplpaga:basic, type=string; label=Répertoire Menu top
         top =
-        # cat=plugin.th_alpaga:basic, type=string; label=Répertoire Menu direct
+        # cat=theme aplpaga:basic, type=string; label=Répertoire Menu direct
 	    direct =
     }
-    # cat=plugin.th_alpaga:basic, type=string; label=Répertoire Pied de page
+    # cat=theme aplpaga:basic, type=string; label=Répertoire Pied de page
 	footer =
 
 	logo {
-        # cat=plugin.th_alpaga:basic, type=string; label=Répertoire Pied de page
+        # cat=theme aplpaga:basic, type=string; label=Répertoire Pied de page
 		file = EXT:alpaga/Resources/Public/Images/logo_cauvaldor.jpg
 		height = 100
 	}
@@ -44,8 +44,11 @@ page {
 	}
 
 	fluidtemplate {
+        # cat=theme aplpaga:basic/template, type=string; label=Path fluid Template 
 		layoutRootPath   = EXT:alpaga/Resources/Private/Layouts/Page/
+        # cat=theme aplpaga:basic/template, type=string; label=Path fluid Partial 
 		partialRootPath  = EXT:alpaga/Resources/Private/Partials/Page/
+        # cat=theme aplpaga:basic/template, type=string; label=Path fluid Root 
 		templateRootPath = EXT:alpaga/Resources/Private/Templates/Page/
 	}
 }
@@ -61,9 +64,9 @@ plugin {
     ###############
     tx_news {
         view {
-            # cat=plugin.th_alpaga:options/news, type=string; label=Path Partials News
+            # cat=theme aplpaga:basic/news, type=string; label=Path Partials News
             partialRootPath  = EXT:alpaga/Resources/Private/Partials/News/
-            # cat=plugin.th_alpaga:options/news, type=string; label=Path Templates News
+            # cat=theme aplpaga:basic/news, type=string; label=Path Templates News
             templateRootPath = EXT:alpaga/Resources/Private/Templates/News/
         }
     }
@@ -82,18 +85,18 @@ plugin {
     ### CAL ###
     ###########
     tx_cal_controller {
-        # cat=plugin.th_alpaga:options/cal, type=string; label=Rep. evenements agenda
+        # cat=theme aplpaga:basic/cal, type=string; label=Rep. evenements agenda
 	    pidList =
 
 	    view {
-            # cat=plugin.th_alpaga:options/cal, type=string; label=Format de la date
+            # cat=theme aplpaga:basic/cal, type=string; label=Format de la date
     		dateFormat = %d %b
     		event {
-                # cat=plugin.th_alpaga:options/cal, type=string; label=Path templates Cal event
+                # cat=theme aplpaga:basic/cal, type=string; label=Path templates Cal event
     		    eventTemplateFluid = EXT:alpaga/Resources/Private/Templates/Cal/event.html
     		}
     		list {
-                # cat=plugin.th_alpaga:options/cal, type=string; label=Path templates Cal list
+                # cat=theme aplpaga:basic/cal, type=string; label=Path templates Cal list
     		    listTemplateFluid = EXT:alpaga/Resources/Private/Templates/Cal/list.html
     		}
     	}
@@ -106,9 +109,9 @@ plugin {
     ### INDEXEDSEARCH ###
     #####################
     tx_indexedsearch {
-        # cat=plugin.th_alpaga:options/indexed_search, type=string; label=Page affichage recherches
+        # cat=theme aplpaga:basic/indexed_search, type=string; label=Page affichage recherches
 	    searchUID = 554
-        # cat=plugin.th_alpaga:options/indexed_search, type=string; label=Afficher recherche avancee
+        # cat=theme aplpaga:basic/indexed_search, type=string; label=Afficher recherche avancee
     	showAdvanced = 1
     }
 
@@ -118,7 +121,7 @@ plugin {
     ######################
     tx_cookieconsent2 {
         settings {
-            # cat=plugin.th_alpaga:options/cookieconsent, type=string; label=Page mentions legales
+            # cat=theme aplpaga:basic/cookieconsent, type=string; label=Page mentions legales
             link = 262
         }
     }
@@ -129,7 +132,7 @@ plugin {
     #############################
     tx_tgmsocialshareprivacy {
         persistence {
-            # cat=plugin.th_alpaga:options/socialshareprivacy, type=string; label=Stockage
+            # cat=theme aplpaga:basic/socialshareprivacy, type=string; label=Stockage
             storagePid = 258
         }
     }
